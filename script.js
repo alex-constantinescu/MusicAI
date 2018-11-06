@@ -1,4 +1,4 @@
-const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+const notes = ['C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4', 'C5'];
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -47,7 +47,7 @@ function main() {
     //playChordArpeggiated(chords.Cmaj7, 200);
     //setTimeout(() => playChordArpeggiated(chords.Dm7, 250), 1500);
 
-    let chord = getRandomChord(4);
+    let chord = getRandomChord(3);
     playChordArpeggiated(chord, 150);
     console.log(chordToString(chord));
 }
