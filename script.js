@@ -21,6 +21,20 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+function playSequentially(actions) {
+    actions.map(() => {
+        let a = actions.shift();
+        if (typeof(a) == "number") {
+            setTimeout(() => {
+                playSequentially(actions);
+            }, a);
+        }
+        else {
+            a();
+        }
+    });
+}
+
 function getAudio(note) {
     return new Audio(`notes/Piano.pp.${note}.mp3`);
 }
@@ -69,11 +83,17 @@ function notesToString(chord) {
 }
 
 function main() {
-    let scale = scales.misc.romanian_minor;
+    let scale = scales.diatonic.dorian;
     let scale_notes = scaleToNotes(scale);
 
     let chord = getRandomChord(3, scale_notes);
     console.log(notesToString(chord));
 
-    playNotesArpeggiated(scale_notes, 270);
+    let actions = [
+        () => {playNotesArpeggiated(scale_notes, 300);},
+        300*scale_notes.length + 600,
+        () => {playNotesArpeggiated(scale_notes.reverse(), 400);},
+    ];
+
+    playSequentially(actions);
 }
